@@ -193,6 +193,7 @@ namespace Nest
 							RequestMethod = request.Method
 						};
 						tracer.SetResult(cs);
+						_ConnectionSettings.ConnectionStatusHandler(cs);
 						return cs;
 					}
 				}
@@ -231,6 +232,7 @@ namespace Nest
 					var cs = new ConnectionStatus(this._ConnectionSettings, new TimeoutException(m));
 					tcs.SetResult(cs);
 					tracer.SetResult(cs);
+					_ConnectionSettings.ConnectionStatusHandler(cs);
 					return tcs.Task;
 				}
 			}
